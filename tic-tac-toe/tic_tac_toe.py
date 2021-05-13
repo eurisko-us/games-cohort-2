@@ -42,7 +42,7 @@ class TicTacToe:
 
   def check_for_winner(self):
     rows = self.board.copy()
-    cols = [[self.board[j][i] for i in range(3)] for j in range(3)]
+    cols = [[self.board[i][j] for i in range(3)] for j in range(3)]
     diags = [[self.board[i][i] for i in range(3)],
              [self.board[i][2-i] for i in range(3)]]
 
