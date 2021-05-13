@@ -33,12 +33,14 @@ class TicTacToe:
       if choices != []:
         player_move = player.choose_move(choices)
         self.board[player_move[0]][player_move[1]] = player.symbol
+      if self.check_for_winner() != None:
+        self.winner = self.check_for_winner()
+        break
     self.round += 1
 
   def run_to_completion(self):
     while self.winner == None:
       self.complete_round()
-      self.winner = self.check_for_winner()
 
   def check_for_winner(self):
     rows = self.board.copy()
