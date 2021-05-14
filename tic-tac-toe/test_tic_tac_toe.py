@@ -1,6 +1,6 @@
 import sys
 from tic_tac_toe import *
-sys.path.append('players')
+sys.path.append('games-cohort-2/tic-tac-toe/players')
 from random_player import *
 
 players = [RandomPlayer(), RandomPlayer()]
