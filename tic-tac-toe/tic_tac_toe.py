@@ -30,7 +30,7 @@ class TicTacToe:
   def complete_round(self):
     for player in self.players:
       choices = self.get_possible_moves()
-      if choices != []:
+      if choices != [] and self.check_for_winner() == None:
         player_move = player.choose_move(choices)
         self.board[player_move[0]][player_move[1]] = player.symbol
       if self.check_for_winner() != None:
