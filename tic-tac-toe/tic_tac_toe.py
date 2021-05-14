@@ -1,8 +1,10 @@
 from random import random
 
 class TicTacToe:
-  def __init__(self, players):
+  def __init__(self, players, second_player_first, see_board=False):
     self.players = players
+    self.second_player_first = second_player_first
+    self.see_board = see_board
     self.set_player_symbols()
     self.set_player_numbers()
     self.determine_player_order()
@@ -19,8 +21,7 @@ class TicTacToe:
     self.players[1].set_player_number(2)
   
   def determine_player_order(self):
-    rand = round(random())
-    if rand == 1:
+    if self.second_player_first:
       self.players = self.players[::-1]
 
   def get_possible_moves(self):
@@ -36,6 +37,8 @@ class TicTacToe:
       if self.check_for_winner() != None:
         self.winner = self.check_for_winner()
         break
+      if self.see_board:
+        self.print_board()
     self.round += 1
 
   def run_to_completion(self):
@@ -62,6 +65,7 @@ class TicTacToe:
     return None
 
   def print_board(self):
+    print('')
     for i in range(len(self.board)):
       row = self.board[i]
       row_string = ''
@@ -71,6 +75,3 @@ class TicTacToe:
         else:
           row_string += space + '|'
       print(row_string[:-1])
-    print('\n')
-
-
