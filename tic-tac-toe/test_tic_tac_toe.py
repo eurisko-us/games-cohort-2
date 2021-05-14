@@ -1,6 +1,6 @@
 import sys
 from tic_tac_toe import *
-sys.path.append('players')
+sys.path.append('games-cohort-2/tic-tac-toe/players')
 from random_player import *
 
 players = [RandomPlayer(), RandomPlayer()]
@@ -19,10 +19,11 @@ print(game.winner)
 num_wins = {1: 0, 2: 0, 'Tie':0}
 
 for _ in range(1000):
-  players = [RandomPlayer(), RandomPlayer()]
-  game = TicTacToe(players)
-  game.run_to_completion()
-  winner = game.winner
+    players = [RandomPlayer(), RandomPlayer()]
+    game = TicTacToe(players)
+    game.run_to_completion()
+    winner = game.winner
 
-  num_wins[winner] += 1
+    num_wins[winner] += 1
+
 print(num_wins)
