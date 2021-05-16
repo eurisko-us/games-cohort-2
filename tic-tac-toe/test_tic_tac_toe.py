@@ -4,20 +4,37 @@ sys.path.append('tic-tac-toe/players')
 from random_player import *
 from minimax_player import *
 
+print("minimax player vs random player - 3 games")
+reverse = False
 players = [MinimaxPlayer(), RandomPlayer()]
-game = TicTacToe(players)
-
+tracker = ['minimax', 'random']
+wins = {'minimax': 0, 'random': 0, 'tie': 0}
+for i in range(1,4):
+    if reverse:
+        players = players[::-1]
+        tracker = tracker[::-1]
+    game = TicTacToe(players)
+    game.run_to_completion()
+    print("game", i, "winner: ",end="")
+    if game.winner == 'Tie':
+        wins['tie'] += 1
+        print("tie")
+    else:
+        wins[tracker[game.winner - 1]] += 1
+        print(str(tracker[game.winner - 1]))
+    reverse = not reverse
+print("results:", wins)
 '''
 game.print_board()
 
 game.complete_round()
 game.print_board()
-'''
+
 game.run_to_completion()
 game.print_board()
 print(game.round)
 print(game.winner)
-'''
+
 num_wins = {1: 0, 2: 0, 'Tie':0}
 
 for _ in range(1000):

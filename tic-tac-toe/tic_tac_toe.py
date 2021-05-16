@@ -30,7 +30,8 @@ class TicTacToe:
   def complete_round(self):
     for player in self.players:
       player_move = player.choose_move(self.board)
-      self.board[player_move[0]][player_move[1]] = player.player_num
+      self.board[player_move[0]][player_move[1]] = player.number
+      self.update_player_boards()
       if self.check_for_winner() != None:
         self.winner = self.check_for_winner()
         break
@@ -52,7 +53,7 @@ class TicTacToe:
         board_full = False
 
       for player in self.players:
-        if row == [player.symbol for _ in range(3)]:
+        if row == [player.number for _ in range(3)]:
           return player.number
     
     if board_full:
@@ -67,8 +68,12 @@ class TicTacToe:
         if space == None:
           row_string += '_|'
         else:
-          row_string += space + '|'
+          row_string += str(space) + '|'
       print(row_string[:-1])
     print('\n')
+
+  def update_player_boards(self):
+    for player in self.players:
+        player.update_board(self.board)
 
 

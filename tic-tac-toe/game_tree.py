@@ -93,11 +93,12 @@ class GameTree():
     def set_node_scores(self):
         assert self.root.children != None, "create game tree before setting scores"
         self.root.set_score()
+        return
     
     def get_best_move(self):
-        scores = [node.score for node in self.children]
+        scores = [node.score for node in self.root.children]
         max_index = scores.index(max(scores))
-        best_result = self.children[max_index]
+        best_result = self.root.children[max_index]
         return best_result.added_coord
 
 def flatten(input_list):
@@ -105,15 +106,16 @@ def flatten(input_list):
     for collection in input_list:
         result += collection
     return result
-
+'''
 root_state = [[None, None, None],[None, None, None],[None, None, None]]
-game = GameTree(root_state, 1)
+game = GameTree(root_state, 2)
 game.create_game_tree()
-#  print("finished making game tree")
+print("finished making game tree")
 game.set_node_scores()
-'''print("finished setting node scores")
+print("finished setting node scores")
 print(game.root.score)
 children = game.root.children
 print([child.score for child in children])
 gchildren = flatten([child.children for child in children])
-print([gchild.score for gchild in gchildren])'''
+print([gchild.score for gchild in gchildren])
+'''
