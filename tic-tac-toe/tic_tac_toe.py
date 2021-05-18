@@ -13,7 +13,7 @@ class TicTacToe:
   def set_player_symbols(self): 
     self.players[0].set_player_symbol('X')
     self.players[1].set_player_symbol('O')
-
+  
   def set_player_numbers(self): 
     self.players[0].set_player_number(1)
     self.players[1].set_player_number(2)
@@ -22,17 +22,16 @@ class TicTacToe:
     rand = round(random())
     if rand == 1:
       self.players = self.players[::-1]
-
+  
   def get_possible_moves(self):
     possible_moves = [(i,j) for i in range(3) for j in range(3) if self.board[i][j] == None]
     return possible_moves
 
   def complete_round(self):
     for player in self.players:
-      choices = self.get_possible_moves()
-      if choices != [] and self.check_for_winner() == None:
-        player_move = player.choose_move(choices)
-        self.board[player_move[0]][player_move[1]] = player.symbol
+      player_move = player.choose_move(self.board)
+      self.board[player_move[0]][player_move[1]] = player.number
+      self.update_boards()
       if self.check_for_winner() != None:
         self.winner = self.check_for_winner()
         break
@@ -54,7 +53,7 @@ class TicTacToe:
         board_full = False
 
       for player in self.players:
-        if row == [player.symbol for _ in range(3)]:
+        if row == [player.number for _ in range(3)]:
           return player.number
     
     if board_full:
@@ -69,8 +68,10 @@ class TicTacToe:
         if space == None:
           row_string += '_|'
         else:
-          row_string += space + '|'
+          row_string += str(space) + '|'
       print(row_string[:-1])
     print('\n')
 
-
+  def update_boards(self):
+    for player in self.players:
+        player.update_board(self.board)

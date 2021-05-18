@@ -11,7 +11,11 @@ class RandomPlayer:
   
   def set_player_number(self, n):
     self.number = n
+
+  def update_board(self, game_state):
+      pass
   
-  def choose_move(self, choices):
+  def choose_move(self, game_state):
+    choices = [(i,j) for i in range(len(game_state)) for j in range(len(game_state)) if game_state[i][j]==None]
     random_idx = math.floor(len(choices) * random())
     return choices[random_idx]
